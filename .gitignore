@@ -108,3 +108,5 @@ object_detection/models/ssd_mobilenet_v2_coco_2018_03_29
 object_detection/checkpoints/
 object_detection/fine_tuned_models/
 *.record
+assets/Testrun_simulator_ab-tl_detection-optimization_compressed.mp4
+assets/simulator_scene.mp4
