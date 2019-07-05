@@ -223,9 +223,9 @@ You can test the fine tuned model using the [Traffic Light Detection Tutorial](o
 |![](assets/site-sample-5.png)|![](assets/sim-sample-5.png)|
 
 
-Alternatively, a model can be tested with the TrafficLightClassifier.py, which is an equivalent implementation to the Traffic Light Detection Node implementation of the [Udacity Self-Driving Car Capstone Project](https://github.com/barrykidney/CarND-Capstone).
+Alternatively, the model can be tested with the TrafficLightClassifier.py, which is an equivalent implementation to the Traffic Light Detection Node implementation of the [Udacity Self-Driving Car Capstone Project](https://github.com/barrykidney/CarND-Capstone).
 ```sh
-<project_directory>\python TrafficLightClassifier.py --frozen-model-path=./object_detection/fine_tuned_models/sim_ssd_inception_v2_coco_2017_11_17/frozen_inference_graph.pb --image=./object_detection/data/sim_training_data/sim_data_capture/left0024.jpg
+(tg-gpu) <project_directory> python TrafficLightClassifier.py --frozen-model-path=./object_detection/fine_tuned_models/ssd_mobilenet_v2_coco_2018_03_29/frozen_inference_graph.pb --image=./object_detection/test_images/real/left001.jpg
 ```
 
 The result looks like this:
