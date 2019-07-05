@@ -145,7 +145,6 @@ All other directories belong to the Object-Detection API and are not relevant fo
 
 The following steps describes how to train a model for the [Udacity Self-Driving Car Capstone Project](https://github.com/barrykidney/CarND-Capstone) under Windows 10:
 
-
 1. Open a Anaconda Prompt
 ```sh
 (base) ..>
@@ -171,16 +170,21 @@ The following steps describes how to train a model for the [Udacity Self-Driving
 (tg-gpu) ..> cd %PROJECT_DIR%\object_detection
 ```
 
-6. Start the [Traffic Light Detection Tutorial](object_detection/traffic_light_detection_tutorial.ipynb) and follow the steps:
+6. Train Traffic-Light-Detection Model (for example using ssd_mobilenet_v2_coco_2018_03_29):
 ```sh
-(tg-gpu) <project_directory>\object_detection> jupyter notebook traffic_light_detection_tutorial.ipynb
+(tg-gpu) <project_directory>\object_detection> python model_main.py --pipeline_config_path=config/ssd_mobilenet_v2.config --model_dir=checkpoints/ssd_mobilenet_v2_coco_2018_03_29
+```
+
+After the training has been completed, the trained model is located at:
+```sh
+<project_directory>\object_detection\checkpoints\ssd_mobilenet_v2_coco_2018_03_29\model.ckpt-20000*
 ```
 
 7. Training Monitoring
 
-To monitor the training, you can start [Tensorboard](https://www.tensorflow.org/guide/summaries_and_tensorboard) from a second console. Here you can see if and how well the model has already learned and whether the training process can be stopped.
+To monitor the training, you can start [Tensorboard](https://www.tensorflow.org/guide/summaries_and_tensorboard) from a second console. Here you can see if and how well the model has already learned.
 ```sh
-(tg-gpu) <project_directory>\object_detection> tensorboard --logdir=checkpoints/<model dir>
+(tg-gpu) <project_directory>\object_detection> tensorboard --logdir=checkpoints/ssd_mobilenet_v2_coco_2018_03_29
 ```
  
 Tensorboard:
@@ -188,17 +192,27 @@ Tensorboard:
 
 8. Export Model
 
-TODO...
+In order to use the model in production the graph must be freezed, this can be don with the following command:
 
-If you followed the steps of the tutorial above and trained a model, it will be located at:
 ```sh
-<project_directory>\object_detection\fine_tuned_models\<model_type>\frozen_inference_graph.pb
+(tg-gpu) <project_directory>\object_detection> python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/ssd_mobilenet_v2.config --trained_checkpoint_prefix checkpoints/model.ckpt-20000 --output_directory fine_tuned_models/ssd_mobilenet_v2_coco_2018_03_29/
 ```
 
-To use this fine tuned model with the [Udacity Self-Driving Car Capstone Project](https://github.com/barrykidney/CarND-Capstone) the file `frozen_inference_graph.pb` must be copied and renamed to the ROS environment `/ros/src/tl_detector/light_classification/tl-detection-model.pb` of the Capstone Project. 
+After exporting, the frozen model is located at:
+```sh
+<project_directory>\object_detection\fine_tuned_models\ssd_mobilenet_v2_coco_2018_03_29\frozen_inference_graph.pb
+```
+
+To use this frozen model with the [Udacity Self-Driving Car Capstone Project](https://github.com/barrykidney/CarND-Capstone) the file `frozen_inference_graph.pb` must be copied and renamed to the ROS environment `/ros/src/tl_detector/light_classification/tl-detection-model.pb` of the Capstone Project. 
 		    	
 ### Test the Model
-You can test the fine tuned model with the [Traffic Light Detection Tutorial](object_detection/traffic_light_detection_tutorial.ipynb) above, the results looks like this: 
+You can test the fine tuned model using the [Traffic Light Detection Tutorial](object_detection/traffic_light_detection_tutorial.ipynb): 
+
+```sh
+(tg-gpu) <project_directory>\object_detection> jupyter notebook traffic_light_detection_tutorial.ipynb
+```
+
+ The results looks like this:
 
 |Carla (real world image)     |Simulator (drawn image)     |
 |-----------------------------|----------------------------|
