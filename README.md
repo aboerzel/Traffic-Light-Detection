@@ -157,22 +157,22 @@ The following steps describes how to train a model for the [Udacity Self-Driving
 
 3. Set the environment variable `PROJECT_DIR` to the `<project_dir>` directory to which you have cloned this project:
 ```sh
-(tg-gpu) ..> set PROJECT_DIR=<project_directory>
+(tf-gpu) ..> set PROJECT_DIR=<project_directory>
 ```
 
 4. Set the environment variable `PYTHONPATH` as follows:
 ```sh
-(tg-gpu) ..> set PYTHONPATH=%PROJECT_DIR%;%PROJECT_DIR%\slim;%PROJECT_DIR%\object_detection
+(tf-gpu) ..> set PYTHONPATH=%PROJECT_DIR%;%PROJECT_DIR%\slim;%PROJECT_DIR%\object_detection
 ```
 
 5. Change to the object-detection directory
 ```sh
-(tg-gpu) ..> cd %PROJECT_DIR%\object_detection
+(tf-gpu) ..> cd %PROJECT_DIR%\object_detection
 ```
 
 6. Train Traffic-Light-Detection Model (for example using ssd_mobilenet_v2_coco_2018_03_29):
 ```sh
-(tg-gpu) <project_directory>\object_detection> python model_main.py --pipeline_config_path=config/ssd_mobilenet_v2.config --model_dir=checkpoints/ssd_mobilenet_v2_coco_2018_03_29
+(tf-gpu) <project_directory>\object_detection> python model_main.py --pipeline_config_path=config/ssd_mobilenet_v2.config --model_dir=checkpoints/ssd_mobilenet_v2_coco_2018_03_29
 ```
 
 After the training has been completed, the trained model is located at:
@@ -184,7 +184,7 @@ After the training has been completed, the trained model is located at:
 
 To monitor the training, you can start [Tensorboard](https://www.tensorflow.org/guide/summaries_and_tensorboard) from a second console. Here you can see if and how well the model has already learned.
 ```sh
-(tg-gpu) <project_directory>\object_detection> tensorboard --logdir=checkpoints/ssd_mobilenet_v2_coco_2018_03_29
+(tf-gpu) <project_directory>\object_detection> tensorboard --logdir=checkpoints/ssd_mobilenet_v2_coco_2018_03_29
 ```
  
 Tensorboard:
@@ -195,7 +195,7 @@ Tensorboard:
 In order to use the model in production the graph must be freezed, this can be don with the following command:
 
 ```sh
-(tg-gpu) <project_directory>\object_detection> python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/ssd_mobilenet_v2.config --trained_checkpoint_prefix checkpoints/model.ckpt-20000 --output_directory fine_tuned_models/ssd_mobilenet_v2_coco_2018_03_29/
+(tf-gpu) <project_directory>\object_detection> python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/ssd_mobilenet_v2.config --trained_checkpoint_prefix checkpoints/model.ckpt-20000 --output_directory fine_tuned_models/ssd_mobilenet_v2_coco_2018_03_29/
 ```
 
 After exporting, the frozen model is located at:
@@ -209,7 +209,7 @@ To use this frozen model with the [Udacity Self-Driving Car Capstone Project](ht
 You can test the fine tuned model using the [Traffic Light Detection Tutorial](object_detection/traffic_light_detection_tutorial.ipynb): 
 
 ```sh
-(tg-gpu) <project_directory>\object_detection> jupyter notebook traffic_light_detection_tutorial.ipynb
+(tf-gpu) <project_directory>\object_detection> jupyter notebook traffic_light_detection_tutorial.ipynb
 ```
 
  The results looks like this:
@@ -225,7 +225,7 @@ You can test the fine tuned model using the [Traffic Light Detection Tutorial](o
 
 Alternatively, the model can be tested with the TrafficLightClassifier.py, which is an equivalent implementation to the Traffic Light Detection Node implementation of the [Udacity Self-Driving Car Capstone Project](https://github.com/barrykidney/CarND-Capstone).
 ```sh
-(tg-gpu) <project_directory> python TrafficLightClassifier.py --frozen-model-path=./object_detection/fine_tuned_models/ssd_mobilenet_v2_coco_2018_03_29/frozen_inference_graph.pb --image=./object_detection/test_images/real/left001.jpg
+(tf-gpu) <project_directory> python TrafficLightClassifier.py --frozen-model-path=./object_detection/fine_tuned_models/ssd_mobilenet_v2_coco_2018_03_29/frozen_inference_graph.pb --image=./object_detection/test_images/real/left001.jpg
 ```
 
 The result looks like this:
