@@ -192,7 +192,7 @@ Tensorboard:
 
 8. Export Model
 
-In order to use the model in production the graph must be freezed, this can be don with the following command:
+In order to use the model in production the graph must be frozen, this can be done with the following command:
 
 ```sh
 (tf-gpu) <project_directory>\object_detection> python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/ssd_mobilenet_v2.config --trained_checkpoint_prefix checkpoints/model.ckpt-20000 --output_directory fine_tuned_models/ssd_mobilenet_v2_coco_2018_03_29/
